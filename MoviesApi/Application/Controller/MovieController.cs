@@ -14,14 +14,16 @@ namespace MoviesAPI.Application.Controller
         private readonly IUpdateMovie _updateMovie;
         private readonly ISearchAllMovie _searchAllMovie;
         private readonly ISearchOneMovie _searchOneMovie;
+        private readonly IDeleteMovie _deleteMovie;
 
 
-        public MovieController(IAddMovie addMovie, IUpdateMovie updateMovie, ISearchAllMovie searchAllMovie, ISearchOneMovie searchOneMovie)
+        public MovieController(IAddMovie addMovie, IUpdateMovie updateMovie, ISearchAllMovie searchAllMovie, ISearchOneMovie searchOneMovie, IDeleteMovie deleteMovie)
         {
             _addMovie = addMovie;
             _updateMovie = updateMovie;
             _searchAllMovie = searchAllMovie;
             _searchOneMovie = searchOneMovie;
+            _deleteMovie = deleteMovie;
         }
 
         [HttpGet]
@@ -48,6 +50,13 @@ namespace MoviesAPI.Application.Controller
             movieDTO.Id = id;
             var movieResponse = _updateMovie.Execute(movieDTO.ToMovie()).ToMovieDTO();
             return Ok(movieResponse);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult ToDelete(string id)
+        {
+            _deleteMovie.Execute(id);
+            return Ok();
         }
     }
 }

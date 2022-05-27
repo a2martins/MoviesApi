@@ -33,10 +33,8 @@ namespace MoviesApi.Adapter.DataService
         public List<Movie> FindAll() =>
             _movieRepository.FindAll().ToMovieList();
 
-        public void Remove(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Remove(string id) =>
+            _movieRepository.Remove(id) > 0;
 
         public Movie Update(Movie movie)
         {

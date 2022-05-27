@@ -19,6 +19,7 @@ builder.Services.AddScoped<IAddMovie, AddMovie>();
 builder.Services.AddScoped<IUpdateMovie, UpdateMovie>();
 builder.Services.AddScoped<ISearchAllMovie, SearchAllMovie>();
 builder.Services.AddScoped<ISearchOneMovie, SearchOneMovie>();
+builder.Services.AddScoped<IDeleteMovie, DeleteMovie>();
 
 //Add Transient 
 builder.Services.AddTransient<IMovieDataService, MovieDataService>();

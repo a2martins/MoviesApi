@@ -36,8 +36,11 @@ namespace MoviesApi.Adapter.Repository
             Console.WriteLine(ros.ToString());
         }
         
-        public void Remove(string id) =>
-            _mongoCollection.DeleteOne(movie => movie.Id == id);
+        public long Remove(string id)
+        {
+            var deleteResult = _mongoCollection.DeleteOne(movie => movie.Id == id);
+            return deleteResult.DeletedCount;
+        }
 
     }
 }

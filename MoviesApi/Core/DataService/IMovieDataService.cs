@@ -14,6 +14,6 @@ namespace MoviesApi.Core.DataService
 
         public Movie Update(Movie movie);
 
-        public void Remove(string id);
+        public bool Remove(string id);
     }
 }
