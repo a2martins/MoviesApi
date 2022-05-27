@@ -1,7 +1,7 @@
-using MoviesApi.Adapter.DataProvider;
+using MoviesApi.Adapter.DataService;
 using MoviesApi.Adapter.Model.Setting;
 using MoviesApi.Adapter.Repository;
-using MoviesApi.Core.DataProvider;
+using MoviesApi.Core.DataService;
 using MoviesApi.Core.Service;
 using MoviesApi.Core.Service.Impl;
 
@@ -15,9 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add dependencie injection to the container.
+builder.Services.AddScoped<ISearchAllMovie, SearchAllMovie>();
 builder.Services.AddScoped<IAddMovie, AddMovie>();
 builder.Services.AddScoped<IUpdateMovie, UpdateMovie>();
-builder.Services.AddTransient<IMovieDataProvider, MovieDataProvider>();
+
+//Add Transient 
+builder.Services.AddTransient<IMovieDataService, MovieDataService>();
 
 // Add MongoDB Settings
 builder.Services.Configure<MovieStoreDatabaseSettings>(

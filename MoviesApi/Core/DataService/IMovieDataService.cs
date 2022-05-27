@@ -1,8 +1,8 @@
 ﻿using MovieApi.Core.Domain;
 
-namespace MoviesApi.Core.DataProvider
+namespace MoviesApi.Core.DataService
 {
-    public interface IMovieDataProvider
+    public interface IMovieDataService
     {
         public Movie? Find(string id);
 

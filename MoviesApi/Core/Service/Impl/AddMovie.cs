@@ -1,14 +1,14 @@
 ﻿using MovieApi.Core.Domain;
 using MoviesApi.Core.CustomException;
-using MoviesApi.Core.DataProvider;
+using MoviesApi.Core.DataService;
 
 namespace MoviesApi.Core.Service.Impl
 {
     internal class AddMovie : IAddMovie
     {
-        private readonly IMovieDataProvider _movieDataProvider;
+        private readonly IMovieDataService _movieDataProvider;
 
-        public AddMovie(IMovieDataProvider movieDataProvider)
+        public AddMovie(IMovieDataService movieDataProvider)
         {
             _movieDataProvider = movieDataProvider;
         }

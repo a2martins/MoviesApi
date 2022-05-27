@@ -27,5 +27,8 @@ namespace MoviesApi.Adapter.Extensions
             CreatedAt = movie.CreatedAt,
             UpdatedAt = movie.UpdatedAt
         };
+
+        public static List<Movie> ToMovieList(this List<MovieModel> movieModels) => 
+            movieModels.Select(movieModel => movieModel.ToMovie()).ToList();
     }
 }

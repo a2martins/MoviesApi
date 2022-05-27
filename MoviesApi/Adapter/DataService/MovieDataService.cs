@@ -1,16 +1,16 @@
 ﻿using MovieApi.Core.Domain;
 using MoviesApi.Adapter.Extensions;
 using MoviesApi.Adapter.Repository;
-using MoviesApi.Core.DataProvider;
+using MoviesApi.Core.DataService;
 
-namespace MoviesApi.Adapter.DataProvider
+namespace MoviesApi.Adapter.DataService
 {
-    public class MovieDataProvider : IMovieDataProvider
+    public class MovieDataService : IMovieDataService
     {
 
         private readonly MovieRepository _movieRepository;
 
-        public MovieDataProvider(MovieRepository movieRepository)
+        public MovieDataService(MovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
@@ -30,10 +30,8 @@ namespace MoviesApi.Adapter.DataProvider
         public Movie? Find(string director, string title) =>
             _movieRepository.Find(director, title)?.ToMovie();
 
-        public List<Movie> FindAll()
-        {
-            throw new NotImplementedException();
-        }
+        public List<Movie> FindAll() =>
+            _movieRepository.FindAll().ToMovieList();
 
         public void Remove(string id)
         {
