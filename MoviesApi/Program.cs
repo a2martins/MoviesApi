@@ -15,9 +15,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add dependencie injection to the container.
-builder.Services.AddScoped<ISearchAllMovie, SearchAllMovie>();
 builder.Services.AddScoped<IAddMovie, AddMovie>();
 builder.Services.AddScoped<IUpdateMovie, UpdateMovie>();
+builder.Services.AddScoped<ISearchAllMovie, SearchAllMovie>();
+builder.Services.AddScoped<ISearchOneMovie, SearchOneMovie>();
 
 //Add Transient 
 builder.Services.AddTransient<IMovieDataService, MovieDataService>();

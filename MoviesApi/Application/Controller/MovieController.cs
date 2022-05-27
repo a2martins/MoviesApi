@@ -9,16 +9,19 @@ namespace MoviesAPI.Application.Controller
     [Route("[controller]")]
     public class MovieController : ControllerBase
     {
-        private readonly ISearchAllMovie _searchAllMovie;
+
         private readonly IAddMovie _addMovie;
         private readonly IUpdateMovie _updateMovie;
+        private readonly ISearchAllMovie _searchAllMovie;
+        private readonly ISearchOneMovie _searchOneMovie;
 
 
-        public MovieController(ISearchAllMovie searchAllMovie, IAddMovie addMovie, IUpdateMovie updateMovie)
+        public MovieController(IAddMovie addMovie, IUpdateMovie updateMovie, ISearchAllMovie searchAllMovie, ISearchOneMovie searchOneMovie)
         {
-            _searchAllMovie = searchAllMovie;
             _addMovie = addMovie;
             _updateMovie = updateMovie;
+            _searchAllMovie = searchAllMovie;
+            _searchOneMovie = searchOneMovie;
         }
 
         [HttpGet]
@@ -26,10 +29,8 @@ namespace MoviesAPI.Application.Controller
             Ok(_searchAllMovie.Execute());
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            return Ok();
-        }
+        public IActionResult GetById(string id) =>
+            Ok(_searchOneMovie.Execute(id));
 
 
         [HttpPost]
