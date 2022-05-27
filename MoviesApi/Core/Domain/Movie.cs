@@ -4,19 +4,23 @@ namespace MovieApi.Core.Domain
 {
     public class Movie
     {
-        public int Id { get; set; }
+        public string? Id { get; set; } = null!;
 
-        [Required]
-        [MaxLength(100)]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
-        [Required]
-        public string Director { get; set; }
+        public string Director { get; set; } = null!;
 
-        [Required]
-        public string Genre { get; set; }
+        public string Genre { get; set; } = null!;
 
-        [Range(1, 180)]
         public int Duration { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; } = null!;
+
+        public override string ToString() =>
+            $"{nameof(Id)}: {Id}, {nameof(Title)}: {Title}, {nameof(Director)}: {Director}," +
+            $" {nameof(Genre)}: {Genre}, {nameof(Duration)}: {Duration}," +
+            $" {nameof(CreatedAt)}: {CreatedAt}, {nameof(UpdatedAt)}: {UpdatedAt}";
     }
 }
