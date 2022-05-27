@@ -19,7 +19,7 @@ namespace MoviesApi.Adapter.Extensions
 
         public static MovieModel ToMovieModel(this Movie movie) => new()
         {
-            Id = ObjectId.GenerateNewId().ToString(),
+            Id = movie.Id ?? ObjectId.GenerateNewId().ToString(),
             Title = movie.Title,
             Genre = movie.Genre,
             Director = movie.Director,

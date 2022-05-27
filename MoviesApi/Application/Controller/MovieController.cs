@@ -42,6 +42,7 @@ namespace MoviesAPI.Application.Controller
         [HttpPut("{id}")]
         public IActionResult ToUpdate(string id, [FromBody] MovieDTO movieDTO)
         {
+            Console.WriteLine(id);
             movieDTO.Id = id;
             var movieResponse = _updateMovie.Execute(movieDTO.ToMovie()).ToMovieDTO();
             return Ok(movieResponse);
