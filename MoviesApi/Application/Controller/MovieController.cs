@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieApi.Core.Domain;
-using MovieApi.Core.Service;
+using MoviesApi.Application.Controller.DTO;
+using MoviesApi.Application.Extensions;
+using MoviesApi.Core.Service;
 
 namespace MoviesAPI.Application.Controller
 {
@@ -8,11 +9,13 @@ namespace MoviesAPI.Application.Controller
     [Route("[controller]")]
     public class MovieController : ControllerBase
     {
-        private readonly IUpsertMovie _upsetMovie;
+        private readonly IAddMovie _addMovie;
+        private readonly IUpdateMovie _updateMovie;
 
-        public MovieController(IUpsertMovie upsetMovie)
+        public MovieController(IAddMovie addMovie, IUpdateMovie updateMovie)
         {
-            _upsetMovie = upsetMovie;
+            _addMovie = addMovie;
+            _updateMovie = updateMovie;
         }
 
         [HttpGet]
@@ -29,10 +32,19 @@ namespace MoviesAPI.Application.Controller
 
 
         [HttpPost]
-        public IActionResult ToAdd([FromBody] Movie movie)
+        public IActionResult ToAdd([FromBody] MovieDTO movieDTO)
         {
-            _upsetMovie.Execute(movie);
-            return CreatedAtAction(nameof(GetById), new { Id = movie.Id }, movie);
+            Console.WriteLine(movieDTO.ToString());
+            var movieResponse = _addMovie.Execute(movieDTO.ToMovie()).ToMovieDTO();
+            return CreatedAtAction(nameof(GetById), new { Id = movieResponse.Id }, movieResponse);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult ToUpdate(string id, [FromBody] MovieDTO movieDTO)
+        {
+            movieDTO.Id = id;
+            var movieResponse = _updateMovie.Execute(movieDTO.ToMovie()).ToMovieDTO();
+            return Ok(movieResponse);
         }
     }
 }
